@@ -6,6 +6,16 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.3] - 2023-11-16
+
+### Added
+
+- Option to trim whitespaces from search text
+
+### Fixed
+
+- Empty query when array settings are empty
+
 ## [0.0.2] - 2023-11-16
 
 ### Added

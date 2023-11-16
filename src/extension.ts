@@ -3,7 +3,7 @@
 import * as vscode from "vscode";
 
 export function generate_query(keyword: string, settings?: Array<string>): string {
-  if (!settings) return "";
+  if (!settings?.length) return "";
 
   const joined_settings = settings.map((setting: string) => `${keyword}:${setting}`).join("+OR+");
   return `(${joined_settings})+`;
@@ -28,7 +28,8 @@ export function activate(context: vscode.ExtensionContext) {
     // Get search text
     const selectionRange = new vscode.Range(editor.selection.start, editor.selection.end);
     let search_text = editor.document.getText(selectionRange);
-    search_text = configs.wrap ? `"${search_text}"` : search_text;
+    search_text = configs.trimText ? search_text.trim() : search_text;
+    search_text = configs.wrapText ? `"${search_text}"` : search_text;
     // Get type params
     const type = configs.get("type", "code");
     // Get query settings: org, languages, repositories

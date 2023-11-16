@@ -2,7 +2,7 @@
   "name": "github-codesearch",
   "displayName": "Github Codesearch",
   "description": "Quick code search on Github with default browser",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.5.0"
   },
@@ -46,9 +46,14 @@
       "title": "Github Codesearch",
       "type": "object",
       "properties": {
-        "github-codesearch.wrap": {
+        "github-codesearch.wrapText": {
           "default": false,
           "description": "Wrap search text in quotes",
+          "type": "boolean"
+        },
+        "github-codesearch.trimText": {
+          "default": false,
+          "description": "Trim whitespaces from search text",
           "type": "boolean"
         },
         "github-codesearch.type": {

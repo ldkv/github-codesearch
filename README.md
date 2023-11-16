@@ -25,11 +25,17 @@ It is available when you have some text selected in the editor.
 
 This extension contributes the following settings:
 
-- `github-codesearch.wrap`:
+- `github-codesearch.wrapText`:
 
   - **Type:** `boolean`
   - **Default:** `false`
   - **Description:** Wrap search text in quotes.
+
+- `github-codesearch.trimText`:
+
+  - **Type:** `boolean`
+  - **Default:** `false`
+  - **Description:** Trim whitespaces from search text.
 
 - `github-codesearch.type`:
 
