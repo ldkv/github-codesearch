@@ -1,0 +1,78 @@
+{
+  "name": "github-codesearch",
+  "displayName": "Github Codesearch",
+  "description": "Quick code search on Github with default browser",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.5.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "publisher": "ledkvu",
+  "author": {
+    "name": "Vu LE"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/ldkv/github-codesearch",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ldkv/github-codesearch"
+  },
+  "icon": "github-mark-white.png",
+  "enableTelemetry": false,
+  "keywords": [
+    "github",
+    "codesearch"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "github-codesearch.codeSearch",
+        "title": "Github Codesearch"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "github-codesearch.codeSearch",
+        "key": "ctrl+shift+alt+f",
+        "mac": "cmd+shift+alt+f",
+        "when": "editorHasSelection"
+      }
+    ],
+    "configuration": {
+      "title": "Github Codesearch",
+      "type": "object",
+      "properties": {
+        "github-codesearch.organization": {
+          "type": "string",
+          "default": "",
+          "scope": "machine",
+          "description": "Your Github organization"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.3",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "@vscode/test-electron": "^2.3.6",
+    "eslint": "^8.52.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^5.2.2"
+  }
+}
