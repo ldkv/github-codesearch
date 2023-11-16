@@ -2,6 +2,13 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 
+export function generate_query(keyword: string, settings?: Array<string>): string {
+  if (!settings) return "";
+
+  const joined_settings = settings.map((setting: string) => `${keyword}:${setting}`).join("+OR+");
+  return `(${joined_settings})+`;
+}
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -12,32 +19,31 @@ export function activate(context: vscode.ExtensionContext) {
   // The command has been defined in the package.json file
   // Now provide the implementation of the command with registerCommand
   // The commandId parameter must match the command field in package.json
-  let disposable = vscode.commands.registerCommand(
-    "github-codesearch.codeSearch",
-    () => {
-      // The code you place here will be executed every time your command is executed
-      const editor = vscode.window.activeTextEditor;
-      if (editor == null) {
-        return;
-      }
-      const selection = editor.selection;
-      const selectionRange = new vscode.Range(
-        selection.start.line,
-        selection.start.character,
-        selection.end.line,
-        selection.end.character
-      );
-      const search_text = editor.document.getText(selectionRange);
-      const organization =
-        vscode.workspace.getConfiguration("github-codesearch").organization;
-      const org_query = organization ? `org%3A${organization}+` : "";
-      const github_url = "https://github.com/search?type=code&";
-      const final_url = vscode.Uri.parse(
-        `${github_url}q=${org_query}"${search_text}"`
-      );
-      vscode.env.openExternal(final_url);
-    }
-  );
+  let disposable = vscode.commands.registerCommand("github-codesearch.codeSearch", () => {
+    // The code you place here will be executed every time your command is executed
+    const editor = vscode.window.activeTextEditor;
+    if (!editor) return;
+
+    const configs = vscode.workspace.getConfiguration("github-codesearch");
+    // Get search text
+    const selectionRange = new vscode.Range(editor.selection.start, editor.selection.end);
+    let search_text = editor.document.getText(selectionRange);
+    search_text = configs.wrap ? `"${search_text}"` : search_text;
+    // Get type params
+    const type = configs.get("type", "code");
+    // Get query settings: org, languages, repositories
+    const org = configs.organization;
+    const org_query = org ? `org%3A${org}+` : "";
+    const language_query = generate_query("language", configs.languages);
+    const repositories = configs.repositories.map((repo: string) =>
+      org && !repo.includes("/") ? `${org}/${repo}` : repo
+    );
+    const repo_query = generate_query("repo", repositories);
+    // Build final URL
+    const base_url = `https://github.com/search?type=${type}&`;
+    const final_url = vscode.Uri.parse(`${base_url}q=${org_query}${repo_query}${language_query}${search_text}`);
+    vscode.env.openExternal(final_url);
+  });
 
   context.subscriptions.push(disposable);
 }

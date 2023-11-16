@@ -2,7 +2,7 @@
   "name": "github-codesearch",
   "displayName": "Github Codesearch",
   "description": "Quick code search on Github with default browser",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.5.0"
   },
@@ -39,18 +39,55 @@
         "command": "github-codesearch.codeSearch",
         "key": "ctrl+shift+alt+f",
         "mac": "cmd+shift+alt+f",
-        "when": "editorHasSelection"
+        "when": "editorTextFocus"
       }
     ],
     "configuration": {
       "title": "Github Codesearch",
       "type": "object",
       "properties": {
+        "github-codesearch.wrap": {
+          "default": false,
+          "description": "Wrap search text in quotes",
+          "type": "boolean"
+        },
+        "github-codesearch.type": {
+          "default": "code",
+          "description": "Search by Github type",
+          "type": "string",
+          "enum": [
+            "code",
+            "repositories",
+            "commits",
+            "issues",
+            "packages",
+            "topics",
+            "wikis",
+            "users"
+          ]
+        },
         "github-codesearch.organization": {
           "type": "string",
           "default": "",
-          "scope": "machine",
-          "description": "Your Github organization"
+          "description": "Limit search to an organization"
+        },
+        "github-codesearch.repositories": {
+          "default": [],
+          "description": "Limit search to one or more repositories",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "github-codesearch.languages": {
+          "default": [],
+          "description": "Limit search to one or more languages",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
         }
       }
     }
