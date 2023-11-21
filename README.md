@@ -4,7 +4,7 @@ This simple [extension](https://marketplace.visualstudio.com/items?itemName=ledk
 
 The extension will **open a new tab in your default browser** with the search results for the highlighted text.
 
-The extension is based on [Github Search queries](https://docs.github.com/en/search-github/searching-on-github).
+The extension is based on this new feature [Github code search](https://github.com/features/code-search).
 
 ## Features
 
