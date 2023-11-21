@@ -1,8 +1,8 @@
 # Github Codesearch extension for Visual Studio Code
 
-This simple [extension](https://marketplace.visualstudio.com/items?itemName=ledkvu.github-codesearch) allows you to search for selected text from your VS Code editor in Github repositories.
+This simple [extension](https://marketplace.visualstudio.com/items?itemName=ledkvu.github-codesearch) allows you to quickly search for selected text from your VS Code editor in Github repositories **using external browser**.
 
-The extension will **open a new tab in your default browser** with the search results for the highlighted text.
+The extension will **open a new tab in your default browser** with the search results for the highlighted text. Needless to say, you need to be logged in beforehand for private repositories.
 
 The extension is based on this new feature [Github code search](https://github.com/features/code-search).
 
