@@ -40,8 +40,12 @@ export function activate(context: vscode.ExtensionContext) {
       org && !repo.includes("/") ? `${org}/${repo}` : repo
     );
     const repo_query = generate_query("repo", repositories);
+    // Get base URL params
+    const default_base_url = `https://github.com/search`;
+    let base_url = configs.baseUrl ? configs.baseUrl : default_base_url;
+    if (base_url.endsWith("?")) base_url = base_url.slice(0, -1);
+    if (type) base_url = `${base_url}?type=${type}&`;
     // Build final URL
-    const base_url = `https://github.com/search?type=${type}&`;
     const final_url = vscode.Uri.parse(`${base_url}q=${org_query}${repo_query}${language_query}${search_text}`);
     vscode.env.openExternal(final_url);
   });

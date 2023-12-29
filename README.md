@@ -19,7 +19,7 @@ The default keybinding for the extension is:
 - For Mac: `Cmd + Shift + Alt + F`
 - For Windows: `Ctrl + Shift + Alt + F`
 
-It is available when you have some text selected in the editor.
+It is available when you have some text selected in the editor. It is also possible to modify the keybinding in the VS Code settings.
 
 ## Extension Settings
 
@@ -36,6 +36,12 @@ This extension contributes the following settings:
   - **Type:** `boolean`
   - **Default:** `false`
   - **Description:** Trim whitespaces from search text.
+
+- `github-codesearch.baseUrl`:
+
+  - **Type:** `string`
+  - **Default:** `https://github.com/search`
+  - **Description:** Base URL to launch search. Useful for Github Enterprise.
 
 - `github-codesearch.type`:
 

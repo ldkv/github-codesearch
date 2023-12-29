@@ -6,6 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.0.4] - 2023-12-29
+
+### Added
+
+- Option to customize base URL for Github Enterprise
+
 ## [0.0.3] - 2023-11-16
 
 ### Added

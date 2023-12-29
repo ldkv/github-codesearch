@@ -2,7 +2,7 @@
   "name": "github-codesearch",
   "displayName": "Github Codesearch",
   "description": "Quick code search on Github with default browser",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.5.0"
   },
@@ -55,6 +55,11 @@
           "default": false,
           "description": "Trim whitespaces from search text",
           "type": "boolean"
+        },
+        "github-codesearch.baseUrl": {
+          "default": "https://github.com/search",
+          "description": "Base Github URL",
+          "type": "string"
         },
         "github-codesearch.type": {
           "default": "code",
