@@ -8,6 +8,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
@@ -22,6 +24,21 @@ jobs:
             exit 1
           fi
       - run: npm run lint
-      - run: npx @vscode/vsce@3 publish
+      - run: npx @vscode/vsce@3 package -o extension.vsix
+
+      - name: Publish to Visual Studio Marketplace
+        run: npx @vscode/vsce@3 publish --packagePath extension.vsix --skip-duplicate
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish to Open VSX
+        run: npx ovsx@1 publish extension.vsix --skip-duplicate
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+
+      - name: Attach VSIX to GitHub release
+        run: |
+          gh release upload "$GITHUB_REF_NAME" extension.vsix --clobber \
+            || gh release create "$GITHUB_REF_NAME" extension.vsix --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}
