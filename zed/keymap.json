@@ -1,0 +1,9 @@
+[
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-shift-alt-f": ["task::Spawn", { "task_name": "Github Codesearch" }],
+      "cmd-shift-alt-f": ["task::Spawn", { "task_name": "Github Codesearch" }]
+    }
+  }
+]

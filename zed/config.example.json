@@ -1,0 +1,9 @@
+{
+  "wrapText": true,
+  "trimText": true,
+  "baseUrl": "https://github.com/search",
+  "type": "code",
+  "organization": "your-organization",
+  "repositories": [],
+  "languages": []
+}

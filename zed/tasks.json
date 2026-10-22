@@ -1,0 +1,10 @@
+[
+  {
+    "label": "Github Codesearch",
+    "command": "node",
+    "args": ["~/.config/zed/github-codesearch.js"],
+    "reveal": "never",
+    "hide": "on_success",
+    "allow_concurrent_runs": true
+  }
+]

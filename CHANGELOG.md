@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+### Added
+
+- Support for Zed editor using tasks
+
 ### Fixed
 
 - Malformed search URL (missing `?`) when search type is empty
@@ -31,11 +35,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - More customization settings:
-
-  - Search by Github type
-  - Wrap search text in quotes
-  - Limit search to one or more repositories
-  - Limit search to one or more languages
+    - Search by Github type
+    - Wrap search text in quotes
+    - Limit search to one or more repositories
+    - Limit search to one or more languages
 
 ## [0.0.1] - 2023-11-16
 
