@@ -10,6 +10,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Support for Zed editor using tasks
 
+### Changed
+
+- Minimum VS Code version is now 1.31, the first version with the `openExternal` API the extension relies on
+- Replace ESLint with Biome for linting and formatting
+- Update dev dependencies to latest versions (TypeScript 7, Mocha 12); development now requires Node 22+
+- Reformat source code
+
 ### Fixed
 
 - Malformed search URL (missing `?`) when search type is empty
