@@ -2,7 +2,7 @@
   "name": "github-codesearch",
   "displayName": "Github Codesearch",
   "description": "Quick code search on Github with default browser",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.31.0"
   },

@@ -10,3 +10,4 @@ biome.json
 **/*.map
 **/*.ts
 zed/**
+.github/**
