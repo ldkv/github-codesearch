@@ -23,22 +23,23 @@ jobs:
             echo "Tag $GITHUB_REF_NAME does not match package.json version $version"
             exit 1
           fi
+          echo "VSIX=github-codesearch-$version.vsix" >> "$GITHUB_ENV"
       - run: npm run lint
-      - run: npx @vscode/vsce@3 package -o extension.vsix
+      - run: npx @vscode/vsce@3 package -o "$VSIX"
 
       - name: Publish to Visual Studio Marketplace
-        run: npx @vscode/vsce@3 publish --packagePath extension.vsix --skip-duplicate
+        run: npx @vscode/vsce@3 publish --packagePath "$VSIX" --skip-duplicate
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
       - name: Publish to Open VSX
-        run: npx ovsx@1 publish extension.vsix --skip-duplicate
+        run: npx ovsx@1 publish "$VSIX" --skip-duplicate
         env:
           OVSX_PAT: ${{ secrets.OVSX_PAT }}
 
       - name: Attach VSIX to GitHub release
         run: |
-          gh release upload "$GITHUB_REF_NAME" extension.vsix --clobber \
-            || gh release create "$GITHUB_REF_NAME" extension.vsix --generate-notes
+          gh release upload "$GITHUB_REF_NAME" "$VSIX" --clobber \
+            || gh release create "$GITHUB_REF_NAME" "$VSIX" --generate-notes
         env:
           GH_TOKEN: ${{ github.token }}
