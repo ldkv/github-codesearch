@@ -25,6 +25,24 @@ jobs:
           fi
           echo "VSIX=github-codesearch-$version.vsix" >> "$GITHUB_ENV"
       - run: npm run lint
+
+      # The Marketplace "Changelog" tab shows the packaged CHANGELOG.md, built here from the
+      # GitHub release notes (including this tag's, generated if its release doesn't exist yet).
+      - name: Generate CHANGELOG.md from GitHub releases
+        run: |
+          notes='gsub("\r"; "") | sub("^## \\[[^\n]*\n+"; "") | gsub("(?<s>^|\n)## "; "\(.s)### ")'
+          {
+            echo "# Changelog"
+            if ! gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+              printf '\n## %s - %s\n\n' "$GITHUB_REF_NAME" "$(date -u +%F)"
+              gh api "repos/$GITHUB_REPOSITORY/releases/generate-notes" -f tag_name="$GITHUB_REF_NAME" --jq ".body | $notes"
+            fi
+            gh api "repos/$GITHUB_REPOSITORY/releases" --paginate \
+              --jq ".[] | select(.draft | not) | \"\n## \(.tag_name) - \(.published_at[:10])\n\n\(.body | $notes)\""
+          } > CHANGELOG.md
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - run: npx @vscode/vsce@3 package -o "$VSIX"
 
       - name: Publish to Visual Studio Marketplace
