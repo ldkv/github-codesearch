@@ -44,7 +44,7 @@ export function activate(context: vscode.ExtensionContext) {
     const default_base_url = `https://github.com/search`;
     let base_url = configs.baseUrl ? configs.baseUrl : default_base_url;
     if (base_url.endsWith("?")) base_url = base_url.slice(0, -1);
-    if (type) base_url = `${base_url}?type=${type}&`;
+    base_url = type ? `${base_url}?type=${type}&` : `${base_url}?`;
     // Build final URL
     const final_url = vscode.Uri.parse(`${base_url}q=${org_query}${repo_query}${language_query}${search_text}`);
     vscode.env.openExternal(final_url);

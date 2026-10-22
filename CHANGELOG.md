@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+### Fixed
+
+- Malformed search URL (missing `?`) when search type is empty
+
 ## [0.0.4] - 2023-12-29
 
 ### Added
