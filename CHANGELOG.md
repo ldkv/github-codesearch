@@ -6,6 +6,12 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-23
+
+### Fixed
+
+- Make the extension available on Open VSX: 0.1.0 and 0.1.1 were blocked there because they were uploaded before the `ledkvu` namespace was verified
+
 ## [0.1.1] - 2026-10-23
 
 ### Added
